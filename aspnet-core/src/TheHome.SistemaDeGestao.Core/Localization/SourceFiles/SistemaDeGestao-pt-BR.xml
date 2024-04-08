@@ -106,5 +106,8 @@
     <text name="RoleDeleteWarningMessage">A função {0} será excluída e desassociada de todos os usuários pertencentes a ela.</text>
     <text name="TenantDeleteWarningMessage">O Tenant {0} será excluído.</text>
     <text name="SearchWithThreeDot">Pesquisar...</text>
+	  <text name="ClienteDeleteWarning">O cliente {0} será deletado.</text>
+	  <text name="EnderecoDeleteWarning">O seguinte endereço será deletado: {0}.</text>
+	  <text name="BusinessManagement">Gerenciamento de Negócio</text>
   </texts>
 </localizationDictionary>

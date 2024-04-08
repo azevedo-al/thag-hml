@@ -21,8 +21,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheHome.SistemaDeGestao.Web
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheHome.SistemaDeGestao.EntityFrameworkCore", "src\TheHome.SistemaDeGestao.EntityFrameworkCore\TheHome.SistemaDeGestao.EntityFrameworkCore.csproj", "{E0580562-F8F2-4EBB-B07A-ABFC6F2C314F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheHome.SistemaDeGestao.AngularUI", "..\angular\TheHome.SistemaDeGestao.AngularUI.csproj", "{B8F80845-11F0-434F-9CB9-E4B2F2BCFBC7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,10 +55,6 @@ Global
 		{E0580562-F8F2-4EBB-B07A-ABFC6F2C314F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0580562-F8F2-4EBB-B07A-ABFC6F2C314F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0580562-F8F2-4EBB-B07A-ABFC6F2C314F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B8F80845-11F0-434F-9CB9-E4B2F2BCFBC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8F80845-11F0-434F-9CB9-E4B2F2BCFBC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8F80845-11F0-434F-9CB9-E4B2F2BCFBC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8F80845-11F0-434F-9CB9-E4B2F2BCFBC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

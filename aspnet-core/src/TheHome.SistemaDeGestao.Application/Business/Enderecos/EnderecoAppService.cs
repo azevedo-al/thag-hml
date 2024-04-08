@@ -1,15 +1,18 @@
 ﻿using Abp.Application.Services;
 using Abp.Domain.Repositories;
+using Abp.Authorization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheHome.SistemaDeGestao.Authorization;
 using TheHome.SistemaDeGestao.Business.Enderecos;
 using TheHome.SistemaDeGestao.Business.Enderecos.Dto;
 
 namespace TheHome.SistemaDeGestao.Business.Enderecos
 {
+    [AbpAuthorize(PermissionNames.Business_Management)]
     public class EnderecoAppService : AsyncCrudAppService<Endereco, EnderecoDto, int, PagedEnderecoResultRequestDto, CreateEnderecoDto, EnderecoDto>, IEnderecoAppService
     {
 

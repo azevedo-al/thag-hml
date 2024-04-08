@@ -1,11 +1,13 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheHome.SistemaDeGestao.Authorization;
 using TheHome.SistemaDeGestao.Authorization.Users;
 using TheHome.SistemaDeGestao.Business.Clientes.Dto;
 using TheHome.SistemaDeGestao.Business.Enderecos;
@@ -13,6 +15,7 @@ using TheHome.SistemaDeGestao.Users.Dto;
 
 namespace TheHome.SistemaDeGestao.Business.Clientes
 {
+    [AbpAuthorize(PermissionNames.Business_Management)]
     public class ClienteAppService : AsyncCrudAppService<Cliente, ClienteDto, int, PagedClienteResultRequestDto, CreateClienteDto, ClienteDto>, IClienteAppService
     {
         private readonly IRepository<Endereco> _enderecoRepository;

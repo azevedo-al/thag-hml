@@ -12,7 +12,7 @@ namespace TheHome.SistemaDeGestao
     {
         public override void PreInitialize()
         {
-            Configuration.Authorization.Providers.Add<SistemaDeGestaoAuthorizationProvider>();
+            Configuration.Authorization.Providers.Add<Authorization.SistemaDeGestaoAuthorizationProvider>();
         }
 
         public override void Initialize()

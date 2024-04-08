@@ -30,6 +30,8 @@ import { ChangePasswordComponent } from './users/change-password/change-password
 import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
 // clientes
 import { ClientesComponent } from '@app/clientes/clientes.component';
+// enderecos
+import { EnderecosComponent } from '@app/enderecos/enderecos.component';
 // layout
 import { HeaderComponent } from './layout/header.component';
 import { HeaderLeftNavbarComponent } from './layout/header-left-navbar.component';
@@ -62,6 +64,8 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
         ResetPasswordDialogComponent,
         // clientes
         ClientesComponent,
+        // enderecos
+        EnderecosComponent,
         // layout
         HeaderComponent,
         HeaderLeftNavbarComponent,
