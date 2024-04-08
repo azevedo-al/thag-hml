@@ -28,6 +28,8 @@ import { CreateUserDialogComponent } from '@app/users/create-user/create-user-di
 import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
+// clientes
+import { ClientesComponent } from '@app/clientes/clientes.component';
 // layout
 import { HeaderComponent } from './layout/header.component';
 import { HeaderLeftNavbarComponent } from './layout/header-left-navbar.component';
@@ -58,6 +60,8 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
         EditUserDialogComponent,
         ChangePasswordComponent,
         ResetPasswordDialogComponent,
+        // clientes
+        ClientesComponent,
         // layout
         HeaderComponent,
         HeaderLeftNavbarComponent,

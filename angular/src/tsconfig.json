@@ -39,7 +39,6 @@
     "strictOutputEventTypes": false,
     "strictDomEventTypes": false,
     "strictLiteralTypes": false,
-    "strictInjectionParameters": false,
-    "allowSyntheticDefaultImports": true
+    "strictInjectionParameters": false
   }
 }
