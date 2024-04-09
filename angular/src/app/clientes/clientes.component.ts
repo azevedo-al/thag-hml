@@ -11,6 +11,8 @@ import {
   ClienteDto,
   ClienteDtoPagedResultDto
 } from '@shared/service-proxies/service-proxies';
+import { CreateClienteDialogComponent } from './create-cliente/create-cliente-dialog.component';
+import { EditClienteDialogComponent } from './edit-cliente/edit-cliente-dialog.component';
 
 class PagedClientesRequestDto extends PagedRequestDto {
   keyword: string;
@@ -34,6 +36,15 @@ export class ClientesComponent extends PagedListingComponentBase<ClienteDto> {
   ) {
     super(injector);
   }
+  
+  createCliente(): void {
+    this.showCreateOrEditClienteDialog();
+  }
+
+  editCliente(cliente: ClienteDto): void {
+    this.showCreateOrEditClienteDialog(cliente.id);
+  }
+
 
   clearFilters(): void {
     this.keyword = '';
@@ -80,5 +91,30 @@ export class ClientesComponent extends PagedListingComponentBase<ClienteDto> {
         }
       }
     );
+  }
+  private showCreateOrEditClienteDialog(id?: number): void {
+    let createOrEditClienteDialog: BsModalRef;
+    if (!id) {
+      createOrEditClienteDialog = this._modalService.show(
+        CreateClienteDialogComponent,
+        {
+          class: 'modal-lg',
+        }
+      );
+    } else {
+      createOrEditClienteDialog = this._modalService.show(
+        EditClienteDialogComponent,
+        {
+          class: 'modal-lg',
+          initialState: {
+            id: id,
+          },
+        }
+      );
+    }
+
+    createOrEditClienteDialog.content.onSave.subscribe(() => {
+      this.refresh();
+    });
   }
 }

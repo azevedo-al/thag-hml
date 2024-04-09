@@ -5,6 +5,12 @@
                 <div class="col-6">
                     <h1>{{ "Clientes" | localize }}</h1>
                 </div>
+                <div class="col-6 text-right">
+                    <a href="javascript:;" class="btn bg-blue" (click)="createCliente()">
+                        <i class="fa fa-plus-square"></i>
+                        {{ "Create" | localize }}
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -161,14 +167,14 @@
                                 <td>{{ cliente.telefone2 }}</td>
                                 <td>{{ cliente.enderecoResidenciaId }}</td>
                                 <td>
-                                    <!-- <button
+                                    <button
                                             type="button"
                                             class="btn btn-sm bg-secondary"
-                                            (click)="editUser(user)"
+                                            (click)="editCliente(cliente)"
                                     >
                                         <i class="fas fa-pencil-alt"></i>
                                         {{ "Edit" | localize }}
-                                    </button> -->
+                                    </button>
                                     <button
                                             type="button"
                                             class="btn btn-sm bg-danger mx-2"
