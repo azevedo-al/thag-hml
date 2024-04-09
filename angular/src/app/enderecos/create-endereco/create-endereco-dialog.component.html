@@ -1,1 +1,177 @@
-<p>create-endereco-dialog works!</p>
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #createEnderecoModal="ngForm"
+  (ngSubmit)="save()"
+>
+  <abp-modal-header
+    [title]="'CreateNewEndereco' | localize"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body">
+    <div class="form-group row required">
+        <label class="col-md-3 col-form-label" for="numero">
+            {{ "NúmeroEndereco" | localize }}
+        </label>
+        <div class="col-md-9">
+            <input
+                type="text"
+                class="form-control"
+                name="numero"
+                id="numero"
+                required
+                maxlength="10"
+                pattern="*[0-9]"
+                [(ngModel)]="endereco.numero"
+                #numeroModel="ngModel"
+                #numeroEl
+            />
+            <abp-validation-summary
+                [control]="numeroModel"
+                [controlEl]="numeroEl"
+            ></abp-validation-summary>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-md-3 col-form-label" for="logradouro">
+            {{ "Logradouro" | localize }}
+        </label>
+        <div class="col-md-9">
+            <input
+                type="text"
+                class="form-control"
+                name="logradouro"
+                id="logradouro"
+                required
+                maxlength="100"
+                [(ngModel)]="endereco.logradouro"
+                #logradouroModel="ngModel"
+                #logradouroEl
+            />
+            <abp-validation-summary
+                [control]="logradouroModel"
+                [controlEl]="logradouroEl"
+            ></abp-validation-summary>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-md-3 col-form-label" for="complemento1">
+            {{ "Complemento 1" | localize }}
+        </label>
+        <div class="col-md-9">
+            <input
+                type="text"
+                class="form-control"
+                name="complemento1"
+                id="complemento1"
+                maxlength="100"
+                [(ngModel)]="endereco.complemento1"
+            />
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-md-3 col-form-label" for="complemento2">
+            {{ "Complemento 2" | localize }}
+        </label>
+        <div class="col-md-9">
+            <input
+                type="text"
+                class="form-control"
+                name="complemento2"
+                id="complemento2"
+                maxlength="100"
+                [(ngModel)]="endereco.complemento2"
+            />
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-md-3 col-form-label" for="bairro">
+            {{ "Bairro" | localize }}
+        </label>
+        <div class="col-md-9">
+            <input
+                type="text"
+                class="form-control"
+                name="bairro"
+                id="bairro"
+                required
+                maxlength="100"
+                [(ngModel)]="endereco.bairro"
+                #bairroModel="ngModel"
+                #bairroEl
+            />
+            <abp-validation-summary
+                [control]="bairroModel"
+                [controlEl]="bairroEl"
+            ></abp-validation-summary>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-md-3 col-form-label" for="cidade">
+            {{ "Cidade" | localize }}
+        </label>
+        <div class="col-md-9">
+            <input
+                type="text"
+                class="form-control"
+                name="cidade"
+                id="cidade"
+                required
+                maxlength="100"
+                [(ngModel)]="endereco.cidade"
+                #cidadeModel="ngModel"
+                #cidadeEl
+            />
+            <abp-validation-summary
+                [control]="cidadeModel"
+                [controlEl]="cidadeEl"
+            ></abp-validation-summary>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-md-3 col-form-label" for="uf">
+            {{ "UF" | localize }}
+        </label>
+        <div class="col-md-9">
+            <input
+                type="text"
+                class="form-control"
+                name="uf"
+                id="uf"
+                required
+                minlength="2"
+                maxlength="2"
+                pattern="*[A-Z]"
+                [(ngModel)]="endereco.uf"
+                #ufModel="ngModel"
+                #ufEl
+            />
+            <abp-validation-summary
+                [control]="ufModel"
+                [controlEl]="ufEl"
+            ></abp-validation-summary>
+        </div>
+    </div>
+    <div class="form-group row required">
+        <label class="col-md-3 col-form-label" for="cep">
+            {{ "CEP" | localize }}
+        </label>
+        <div class="col-md-9">
+            <input
+                type="text"
+                class="form-control"
+                name="cep"
+                id="cep"
+                maxlength="9"
+                pattern="[0-9][0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]"
+                [(ngModel)]="endereco.cep"
+            />
+        </div>
+    </div>
+  </div>
+  <abp-modal-footer
+    [cancelDisabled]="saving"
+    [saveDisabled]="!createEnderecoModal.form.valid || saving"
+    (onCancelClick)="bsModalRef.hide()"
+  ></abp-modal-footer>
+</form>

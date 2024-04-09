@@ -11,7 +11,7 @@ using Abp.AutoMapper;
 
 namespace TheHome.SistemaDeGestao.Business.Clientes.Dto
 {
-    [AutoMapFrom(typeof(Cliente))]
+    [AutoMapTo(typeof(Cliente))]
     public class CreateClienteDto : EntityDto
     {
         [Required]

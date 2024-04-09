@@ -5,6 +5,12 @@
                 <div class="col-6">
                     <h1>{{ "Endereços" | localize }}</h1>
                 </div>
+                <div class="col-6 text-right">
+                    <a href="javascript:;" class="btn bg-blue" (click)="createEndereco()">
+                        <i class="fa fa-plus-square"></i>
+                        {{ "Create" | localize }}
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -167,14 +173,14 @@
                                 <td>{{ endereco.complemento1 }}</td>
                                 <td>{{ endereco.complemento2 }}</td>
                                 <td>
-                                    <!-- <button
+                                    <button
                                             type="button"
                                             class="btn btn-sm bg-secondary"
-                                            (click)="editUser(user)"
+                                            (click)="editEndereco(endereco)"
                                     >
                                         <i class="fas fa-pencil-alt"></i>
                                         {{ "Edit" | localize }}
-                                    </button> -->
+                                    </button>
                                     <button
                                             type="button"
                                             class="btn btn-sm bg-danger mx-2"

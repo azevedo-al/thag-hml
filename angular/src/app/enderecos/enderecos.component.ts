@@ -11,6 +11,9 @@ import {
   EnderecoDto,
   EnderecoDtoPagedResultDto
 } from '@shared/service-proxies/service-proxies';
+import { CreateEnderecoDialogComponent } from './create-endereco/create-endereco-dialog.component';
+import { EditEnderecoDialogComponent } from './edit-endereco/edit-endereco-dialog.component';
+
 
 class PagedEnderecosRequestDto extends PagedRequestDto {
   keyword: string;
@@ -33,6 +36,14 @@ export class EnderecosComponent extends PagedListingComponentBase<EnderecoDto> {
     private _modalService: BsModalService
   ) {
     super(injector);
+  }
+  
+  createEndereco(): void {
+    this.showCreateOrEditEnderecoDialog();
+  }
+
+  editEndereco(endereco: EnderecoDto): void {
+    this.showCreateOrEditEnderecoDialog(endereco.id);
   }
 
   clearFilters(): void {
@@ -86,5 +97,30 @@ export class EnderecosComponent extends PagedListingComponentBase<EnderecoDto> {
         }
       }
     );
+  }
+  private showCreateOrEditEnderecoDialog(id?: number): void {
+    let createOrEditEnderecoDialog: BsModalRef;
+    if (!id) {
+      createOrEditEnderecoDialog = this._modalService.show(
+        CreateEnderecoDialogComponent,
+        {
+          class: 'modal-lg',
+        }
+      );
+    } else {
+      createOrEditEnderecoDialog = this._modalService.show(
+        EditEnderecoDialogComponent,
+        {
+          class: 'modal-lg',
+          initialState: {
+            id: id,
+          },
+        }
+      );
+    }
+
+    createOrEditEnderecoDialog.content.onSave.subscribe(() => {
+      this.refresh();
+    });
   }
 }

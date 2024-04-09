@@ -1,10 +1,8 @@
-﻿using Abp.Domain.Entities;
+﻿using Abp.AutoMapper;
+using Abp.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TheHome.SistemaDeGestao.Business.Enderecos
 {
