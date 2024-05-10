@@ -1,0 +1,162 @@
+<form
+  class="form-horizontal"
+  autocomplete="off"
+  #projetoDetailsModal="ngForm"
+  (ngSubmit)="save()"
+>
+  <abp-modal-header
+    [title]="'ProjetoDetails' | localize"
+    (onCloseClick)="bsModalRef.hide()"
+  ></abp-modal-header>
+  <div class="modal-body">
+    <tabset>
+        <tab [heading]="'ProjetoDetails' | localize" class="pt-3 px-2">
+            <div class="form-group row">
+                <label class="col-md-2">
+                    {{ "Cliente" | localize }}:
+                </label>
+                <label class="col-md-9">
+                    {{projeto.cliente}}
+                </label>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">
+                    {{ "Tipo" | localize }}:
+                </label>
+                <label class="col-md-9">
+                    {{projeto.tipo}}
+                </label>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">
+                    {{ "Status" | localize }}:
+                </label>
+                <label class="col-md-9">
+                    {{projeto.status}}
+                </label>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">
+                    {{ "Prazo" | localize }}:
+                </label>
+                <label class="col-md-9">
+                    {{projeto.prazo}}
+                </label>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2">
+                    {{ "Endereco" | localize }}:
+                </label>
+                <label class="col-md-9">
+                    {{projeto.endereco.logradouro}}, {{projeto.endereco.numero}}<br>
+                    {{enderecoDtoComplementoToString(projeto.endereco.complemento1)}}
+                    {{enderecoDtoComplementoToString(projeto.endereco.complemento2)}}
+                    {{projeto.endereco.bairro}}<br>
+                    {{projeto.endereco.cidade}} - {{projeto.endereco.uf}}<br>
+                    {{enderecoDtoComplementoToString(projeto.endereco.cep)}}
+                </label>
+            </div>
+        </tab>
+        <tab [heading]="'Notes' | localize" class="pt-3 px-2">
+            <div>
+                <div class="row-md-6 text-center" [hidden]="creatingNewNote">
+                    <a href="javascript:;" class="btn bg-blue" (click)="newNote()">
+                        <i class="fa fa-plus-square"></i>
+                        {{ "NewNote" | localize }}
+                    </a>
+                </div>
+                <div class="form-group row text-center pt-3 pb-3 m-0" [hidden]="!creatingNewNote">
+                    <label class="col-md-2 text-right">
+                        {{ hoje.format("DD/mm/yyyy") }}
+                    </label>
+                    <textarea
+                        type="text"
+                        class="form-control col text-left"
+                        name="newNoteText"
+                        id="newNoteText"
+                        [(ngModel)]="newNoteText">
+                    </textarea>
+                </div>
+                <div class="row-md-6 text-center" [hidden]="!creatingNewNote">
+                    <a href="javascript:;" class="btn bg-blue" (click)="submitNote()">
+                        <i class="fa fa-plus-square"></i>
+                        {{ "SubmitNote" | localize }}
+                    </a>
+                </div>
+                <ng-container *ngFor="let nota of projeto.notas; let i = index">
+                    <div class="form-group row text-center pt-3 pb-0 m-0">
+                        <label class="col-md-2 text-right">
+                            {{ nota.data  }}
+                        </label>
+                        <label class="col text-left">
+                            {{ nota.texto }}
+                        </label>
+                    </div>
+                </ng-container>
+            </div>
+        </tab>
+        <tab [heading]="'Visit' | localize" class="pt-3 px-2">
+            <div class="form-group row text-center pt-3 pb-3 m-0">
+                <label class="col-md-2 text-right">
+                    Medidas:
+                </label>
+                <textarea
+                    type="text"
+                    class="form-control col text-left"
+                    name="medidas"
+                    id="medidas"
+                    [(ngModel)]="projeto.visita.medidas">
+                </textarea>
+            </div>
+            <div class="form-group row text-center pt-3 pb-3 m-0">
+                <label class="col-md-2 text-right">
+                    Observações:
+                </label>
+                <textarea
+                    type="text"
+                    class="form-control col text-left"
+                    name="obs"
+                    id="obs"
+                    [(ngModel)]="projeto.visita.obs">
+                </textarea>
+            </div>
+            <div class="form-group row text-center pt-3 pb-3 m-0">
+                <div class="col-md-2 text-right">
+                    <label>
+                        Fotos anexadas:
+                    </label>
+                </div>
+                <div class="col" style="align-items: center; justify-content: center; width: 60%;">
+                    <!--  overflow-y:scroll; -->
+                    <ng-container *ngFor="let foto of projeto.visita.fotos; let i = index">
+                        <div class="border" style="align-items: center; justify-content: center; width: 50%; height: 100px;">
+                            <label style="align-items: center; justify-content: center; width: 50%; height: 50%;">
+                                {{ foto }}
+                            </label>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="form-group row text-center">
+                <div class="col" style="justify-content: left;">
+                    <a href="javascript:;" class="btn bg-blue" (click)="annexPhoto()">
+                        <i class="fa fa-plus-square"></i>
+                        {{ "AnnexPhoto" | localize }}
+                    </a>
+                </div>
+                <div class="col" style="justify-content: right;">
+                    <a href="javascript:;" class="btn bg-blue" (click)="finalizeVisit()">
+                        <i class="fa fa-check"></i>
+                        {{ "FinalizeVisit" | localize }}
+                    </a>
+                </div>
+            </div>
+        </tab>
+    </tabset>
+    <div class="row-md text-right">
+        <a href="javascript:;" class="btn bg-blue" (click)="bsModalRef.hide()">
+            {{ "OK" | localize }}
+        </a>
+    </div>
+  </div>
+</form>

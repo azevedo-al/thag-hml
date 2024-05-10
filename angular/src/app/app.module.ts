@@ -36,6 +36,9 @@ import { EditClienteDialogComponent } from '@app/clientes/edit-cliente/edit-clie
 import { EnderecosComponent } from '@app/enderecos/enderecos.component';
 import { CreateEnderecoDialogComponent } from '@app/enderecos/create-endereco/create-endereco-dialog.component';
 import { EditEnderecoDialogComponent } from '@app/enderecos/edit-endereco/edit-endereco-dialog.component';
+// projetos
+import { ProjetosComponent } from '@app/projetos/projetos.component';
+import { ProjetoDetailsDialogComponent } from '@app/projetos/projeto-details/projeto-details-dialog.component';
 // layout
 import { HeaderComponent } from './layout/header.component';
 import { HeaderLeftNavbarComponent } from './layout/header-left-navbar.component';
@@ -74,6 +77,9 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
         EnderecosComponent,
         CreateEnderecoDialogComponent,
         EditEnderecoDialogComponent,
+        // projetos
+        ProjetosComponent,
+        ProjetoDetailsDialogComponent,
         // layout
         HeaderComponent,
         HeaderLeftNavbarComponent,

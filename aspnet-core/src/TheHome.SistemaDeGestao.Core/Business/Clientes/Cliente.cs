@@ -7,30 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TheHome.SistemaDeGestao.Business.Enderecos;
+using TheHome.SistemaDeGestao.Business.Pessoas;
+using TheHome.SistemaDeGestao.Business.Projetos;
 
 namespace TheHome.SistemaDeGestao.Business.Clientes
 {
-    public class Cliente : Entity
+    public class Cliente : Entity<long>
     {
         [Required]
-        [MaxLength(200)]
-        public virtual string Nome { get; set; }
-
+        public virtual long PessoaId { get; set; }
+        [ForeignKey("PessoaId")]
+        public virtual Pessoa Pessoa { get; set; }
         [Required]
-        [EmailAddress]
-        [MaxLength(100)]
-        public virtual string Email { get; set; }
-
-        [Required]
-        [MaxLength(20)]
-        public virtual string Telefone1 { get; set; }
-
-        [MaxLength(20)]
-        public virtual string Telefone2 { get; set; }
-
-        [Required]
-        public virtual int EnderecoResidenciaId { get; set; }
-        [ForeignKey("EnderecoResidenciaId")]
-        public virtual Endereco EnderecoResidencia { get; set; }
+        public virtual ICollection<long> ProjetosId { get; set; }
+        [ForeignKey("ProjetosId")]
+        public virtual ICollection<Projeto> Projetos { get; set; }
     }
 }
