@@ -17,10 +17,10 @@ namespace TheHome.SistemaDeGestao.Business.Clientes
         [Required]
         public virtual long PessoaId { get; set; }
         [ForeignKey("PessoaId")]
-        public virtual Pessoa Pessoa { get; set; }
+        public virtual Pessoa Pessoa { get; }
         [Required]
         public virtual ICollection<long> ProjetosId { get; set; }
         [ForeignKey("ProjetosId")]
-        public virtual ICollection<Projeto> Projetos { get; set; }
+        public virtual ICollection<Projeto> Projetos { get; }
     }
 }

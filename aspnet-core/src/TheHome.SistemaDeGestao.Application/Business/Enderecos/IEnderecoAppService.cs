@@ -8,7 +8,7 @@ using TheHome.SistemaDeGestao.Business.Enderecos.Dto;
 
 namespace TheHome.SistemaDeGestao.Business.Enderecos
 {
-    public interface IEnderecoAppService : IAsyncCrudAppService<EnderecoDto, int, PagedEnderecoResultRequestDto, CreateEnderecoDto, EnderecoDto>
+    public interface IEnderecoAppService : IAsyncCrudAppService<EnderecoDto, long, PagedEnderecoResultRequestDto, CreateEnderecoDto, EnderecoDto>
     {
     }
 }

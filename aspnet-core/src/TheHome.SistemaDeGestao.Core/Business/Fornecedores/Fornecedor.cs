@@ -15,6 +15,6 @@ namespace TheHome.SistemaDeGestao.Business.Fornecedores
         [Required]
         public virtual long PessoaId { get; set; }
         [ForeignKey("PessoaId")]
-        public virtual Pessoa Pessoa { get; set; }
+        public virtual Pessoa Pessoa { get; }
     }
 }

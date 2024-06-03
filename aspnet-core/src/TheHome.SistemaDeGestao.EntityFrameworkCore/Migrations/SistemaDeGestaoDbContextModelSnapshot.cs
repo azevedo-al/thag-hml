@@ -1579,55 +1579,116 @@ namespace TheHome.SistemaDeGestao.Migrations
                     b.ToTable("AbpUsers");
                 });
 
-            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Clientes.Cliente", b =>
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Arquivos.Foto", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("Email")
+                    b.Property<long?>("EstagioVisitaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Path")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("EnderecoResidenciaId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("Telefone1")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Telefone2")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EnderecoResidenciaId");
+                    b.HasIndex("EstagioVisitaId");
+
+                    b.ToTable("Fotos");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Arquivos.PDF", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PDFs");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Clientes.Cliente", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("PessoaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ProjetosId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PessoaId")
+                        .IsUnique();
 
                     b.ToTable("Clientes");
                 });
 
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Contatos.InfoContato", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("Telefone1_DDD")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
+                    b.Property<string>("Telefone1_Numero")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("Telefone2_DDD")
+                        .HasMaxLength(5)
+                        .HasColumnType("nvarchar(5)");
+
+                    b.Property<string>("Telefone2_Numero")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contatos");
+                });
+
             modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Enderecos.Endereco", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Bairro")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("CEP")
                         .HasMaxLength(10)
@@ -1635,21 +1696,21 @@ namespace TheHome.SistemaDeGestao.Migrations
 
                     b.Property<string>("Cidade")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Complemento1")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Complemento2")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Logradouro")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Numero")
                         .IsRequired()
@@ -1664,6 +1725,561 @@ namespace TheHome.SistemaDeGestao.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Enderecos");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.Contratos.EstagioContrato", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long?>("ContratoAssinadoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("DataCancelamento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("FormaPagamentoId")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("MedidasExecucaoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("PreContratoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("PrevisaoConclusao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("ProximoEstagioId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContratoAssinadoId");
+
+                    b.HasIndex("FormaPagamentoId");
+
+                    b.HasIndex("MedidasExecucaoId");
+
+                    b.HasIndex("PreContratoId");
+
+                    b.HasIndex("ProximoEstagioId");
+
+                    b.ToTable("EstagiosContrato");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.Entregas.EstagioEntrega", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime?>("DataCancelamento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("PrevisaoConclusao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("ProximoEstagioId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProximoEstagioId");
+
+                    b.ToTable("EstagiosEntrega");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.EstagioFinal", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("DataInicio")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EstagiosFinalizado");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.Orcamentos.EstagioOrcamento", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime?>("DataCancelamento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("OrcamentoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("PrevisaoConclusao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("ProjetoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("ProximoEstagioId")
+                        .HasColumnType("bigint");
+
+                    b.Property<float?>("ValorTotal")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrcamentoId");
+
+                    b.HasIndex("ProjetoId");
+
+                    b.HasIndex("ProximoEstagioId");
+
+                    b.ToTable("EstagiosOrcamento");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.Producoes.ChecklistItem", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Desc")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<long?>("EstagioProducaoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsChecked")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EstagioProducaoId");
+
+                    b.ToTable("ChecklistItem");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.Producoes.EstagioProducao", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime?>("DataCancelamento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("PrevisaoConclusao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("ProximoEstagioId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProximoEstagioId");
+
+                    b.ToTable("EstagiosProducao");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.Visitas.EstagioVisita", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime?>("DataCancelamento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MedidasProjeto")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Observacoes")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<DateTime>("PrevisaoConclusao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("ProximoEstagioId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProximoEstagioId");
+
+                    b.ToTable("EstagiosVisita");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estoque.FluxoEstoque", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("DataCadastroFluxo")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataRetirado")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Desc")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(21)
+                        .HasColumnType("nvarchar(21)");
+
+                    b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Qtd")
+                        .HasColumnType("real");
+
+                    b.Property<long?>("SubstitutoId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ItemId");
+
+                    b.HasIndex("SubstitutoId");
+
+                    b.ToTable("FluxoEstoque");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("FluxoEstoque");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estoque.ItemEstoque", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Desc")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<float>("Total")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Unidade")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ItensEstoque");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Financeiro.Compra", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Descricao")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<long>("DespesaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("EstagioProducaoId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DespesaId");
+
+                    b.HasIndex("EstagioProducaoId");
+
+                    b.ToTable("Compras");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Financeiro.FluxoCaixa", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long?>("ComprovanteId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("DataPagamento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataRegistro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataVencimento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Desc")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<int?>("FormaPagamentoId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Montante")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComprovanteId");
+
+                    b.HasIndex("FormaPagamentoId");
+
+                    b.ToTable("FluxoCaixa");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("FluxoCaixa");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.FormasPagamento.FormaPagamentoGeral", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("FormaPagamentoProjetoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FormaPagamentoProjetoId");
+
+                    b.ToTable("FormasPagamentoGerais");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.FormasPagamento.FormaPagamentoProjeto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<float>("Desconto")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Descricao")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<float>("Juros")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FormasPagamentoProjeto");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.FormasPagamento.ParcelaProjeto", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("FormaPagamentoProjetoId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("ParteValor")
+                        .HasColumnType("real");
+
+                    b.Property<float>("ValorFixo")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FormaPagamentoProjetoId");
+
+                    b.ToTable("ParcelaProjeto");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Fornecedores.Fornecedor", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("PessoaId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PessoaId")
+                        .IsUnique();
+
+                    b.ToTable("Fornecedores");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Pessoas.Pessoa", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("CPF_CNPJ")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("DataNascimento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("EnderecoResidenciaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("InfoContatoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsPJ")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EnderecoResidenciaId");
+
+                    b.HasIndex("InfoContatoId");
+
+                    b.ToTable("Pessoas");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Projetos.NotaProjeto", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Corpo")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("ProjetoId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjetoId");
+
+                    b.ToTable("NotasProjeto");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Projetos.Projeto", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("LocalId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ProjetosId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<long>("VisitaId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjetosId");
+
+                    b.HasIndex("VisitaId");
+
+                    b.ToTable("Projetos");
                 });
 
             modelBuilder.Entity("TheHome.SistemaDeGestao.MultiTenancy.Tenant", b =>
@@ -1781,6 +2397,59 @@ namespace TheHome.SistemaDeGestao.Migrations
                     b.ToTable("AbpPermissions");
 
                     b.HasDiscriminator().HasValue("UserPermissionSetting");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estoque.AbastecimentoEstoque", b =>
+                {
+                    b.HasBaseType("TheHome.SistemaDeGestao.Business.Estoque.FluxoEstoque");
+
+                    b.Property<long?>("CompraId")
+                        .HasColumnType("bigint");
+
+                    b.HasIndex("CompraId");
+
+                    b.HasDiscriminator().HasValue("AbastecimentoEstoque");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estoque.UsoEstoque", b =>
+                {
+                    b.HasBaseType("TheHome.SistemaDeGestao.Business.Estoque.FluxoEstoque");
+
+                    b.Property<long?>("EstagioProducaoId")
+                        .HasColumnType("bigint");
+
+                    b.HasIndex("EstagioProducaoId");
+
+                    b.HasDiscriminator().HasValue("UsoEstoque");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Financeiro.Despesa", b =>
+                {
+                    b.HasBaseType("TheHome.SistemaDeGestao.Business.Financeiro.FluxoCaixa");
+
+                    b.Property<long?>("FornecedorId")
+                        .HasColumnType("bigint");
+
+                    b.HasIndex("FornecedorId");
+
+                    b.HasDiscriminator().HasValue("Despesa");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Financeiro.Receita", b =>
+                {
+                    b.HasBaseType("TheHome.SistemaDeGestao.Business.Financeiro.FluxoCaixa");
+
+                    b.Property<long?>("ClienteId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("EstagioEntregaId")
+                        .HasColumnType("bigint");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("EstagioEntregaId");
+
+                    b.HasDiscriminator().HasValue("Receita");
                 });
 
             modelBuilder.Entity("Abp.Authorization.Roles.RoleClaim", b =>
@@ -1948,7 +2617,181 @@ namespace TheHome.SistemaDeGestao.Migrations
                     b.Navigation("LastModifierUser");
                 });
 
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Arquivos.Foto", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Estagios.Visitas.EstagioVisita", null)
+                        .WithMany("Fotos")
+                        .HasForeignKey("EstagioVisitaId");
+                });
+
             modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Clientes.Cliente", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Pessoas.Pessoa", null)
+                        .WithOne("Cliente")
+                        .HasForeignKey("TheHome.SistemaDeGestao.Business.Clientes.Cliente", "PessoaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.Contratos.EstagioContrato", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Arquivos.PDF", "ContratoAssinado")
+                        .WithMany()
+                        .HasForeignKey("ContratoAssinadoId");
+
+                    b.HasOne("TheHome.SistemaDeGestao.Business.FormasPagamento.FormaPagamentoProjeto", "FormaPagamento")
+                        .WithMany()
+                        .HasForeignKey("FormaPagamentoId");
+
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Arquivos.PDF", "MedidasExecucao")
+                        .WithMany()
+                        .HasForeignKey("MedidasExecucaoId");
+
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Arquivos.PDF", "PreContrato")
+                        .WithMany()
+                        .HasForeignKey("PreContratoId");
+
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Estagios.Producoes.EstagioProducao", "ProximoEstagio")
+                        .WithMany()
+                        .HasForeignKey("ProximoEstagioId");
+
+                    b.Navigation("ContratoAssinado");
+
+                    b.Navigation("FormaPagamento");
+
+                    b.Navigation("MedidasExecucao");
+
+                    b.Navigation("PreContrato");
+
+                    b.Navigation("ProximoEstagio");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.Entregas.EstagioEntrega", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Estagios.EstagioFinal", "ProximoEstagio")
+                        .WithMany()
+                        .HasForeignKey("ProximoEstagioId");
+
+                    b.Navigation("ProximoEstagio");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.Orcamentos.EstagioOrcamento", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Arquivos.PDF", "Orcamento")
+                        .WithMany()
+                        .HasForeignKey("OrcamentoId");
+
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Arquivos.PDF", "Projeto")
+                        .WithMany()
+                        .HasForeignKey("ProjetoId");
+
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Estagios.Contratos.EstagioContrato", "ProximoEstagio")
+                        .WithMany()
+                        .HasForeignKey("ProximoEstagioId");
+
+                    b.Navigation("Orcamento");
+
+                    b.Navigation("Projeto");
+
+                    b.Navigation("ProximoEstagio");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.Producoes.ChecklistItem", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Estagios.Producoes.EstagioProducao", null)
+                        .WithMany("Checklist")
+                        .HasForeignKey("EstagioProducaoId");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.Producoes.EstagioProducao", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Estagios.Entregas.EstagioEntrega", "ProximoEstagio")
+                        .WithMany()
+                        .HasForeignKey("ProximoEstagioId");
+
+                    b.Navigation("ProximoEstagio");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.Visitas.EstagioVisita", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Estagios.Orcamentos.EstagioOrcamento", "ProximoEstagio")
+                        .WithMany()
+                        .HasForeignKey("ProximoEstagioId");
+
+                    b.Navigation("ProximoEstagio");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estoque.FluxoEstoque", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Estoque.ItemEstoque", "Item")
+                        .WithMany("Movimentos")
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Estoque.FluxoEstoque", "Substituto")
+                        .WithMany()
+                        .HasForeignKey("SubstitutoId");
+
+                    b.Navigation("Item");
+
+                    b.Navigation("Substituto");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Financeiro.Compra", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Financeiro.Despesa", "Despesa")
+                        .WithMany()
+                        .HasForeignKey("DespesaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Estagios.Producoes.EstagioProducao", null)
+                        .WithMany("Compras")
+                        .HasForeignKey("EstagioProducaoId");
+
+                    b.Navigation("Despesa");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Financeiro.FluxoCaixa", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Arquivos.PDF", "Comprovante")
+                        .WithMany()
+                        .HasForeignKey("ComprovanteId");
+
+                    b.HasOne("TheHome.SistemaDeGestao.Business.FormasPagamento.FormaPagamentoGeral", "FormaPagamento")
+                        .WithMany()
+                        .HasForeignKey("FormaPagamentoId");
+
+                    b.Navigation("Comprovante");
+
+                    b.Navigation("FormaPagamento");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.FormasPagamento.FormaPagamentoGeral", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.FormasPagamento.FormaPagamentoProjeto", null)
+                        .WithMany("FormasPagamentoAceitas")
+                        .HasForeignKey("FormaPagamentoProjetoId");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.FormasPagamento.ParcelaProjeto", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.FormasPagamento.FormaPagamentoProjeto", null)
+                        .WithMany("Parcelas")
+                        .HasForeignKey("FormaPagamentoProjetoId");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Fornecedores.Fornecedor", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Pessoas.Pessoa", null)
+                        .WithOne("Fornecedor")
+                        .HasForeignKey("TheHome.SistemaDeGestao.Business.Fornecedores.Fornecedor", "PessoaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Pessoas.Pessoa", b =>
                 {
                     b.HasOne("TheHome.SistemaDeGestao.Business.Enderecos.Endereco", "EnderecoResidencia")
                         .WithMany()
@@ -1956,7 +2799,45 @@ namespace TheHome.SistemaDeGestao.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Contatos.InfoContato", "InfoContato")
+                        .WithMany()
+                        .HasForeignKey("InfoContatoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("EnderecoResidencia");
+
+                    b.Navigation("InfoContato");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Projetos.NotaProjeto", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Projetos.Projeto", "Projeto")
+                        .WithMany("Notas")
+                        .HasForeignKey("ProjetoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Projeto");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Projetos.Projeto", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Clientes.Cliente", "Cliente")
+                        .WithMany("Projetos")
+                        .HasForeignKey("ProjetosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Estagios.Visitas.EstagioVisita", "Visita")
+                        .WithMany()
+                        .HasForeignKey("VisitaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Visita");
                 });
 
             modelBuilder.Entity("TheHome.SistemaDeGestao.MultiTenancy.Tenant", b =>
@@ -2015,6 +2896,42 @@ namespace TheHome.SistemaDeGestao.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estoque.AbastecimentoEstoque", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Financeiro.Compra", null)
+                        .WithMany("AdicoesAoEstoque")
+                        .HasForeignKey("CompraId");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estoque.UsoEstoque", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Estagios.Producoes.EstagioProducao", null)
+                        .WithMany("UsosEstoque")
+                        .HasForeignKey("EstagioProducaoId");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Financeiro.Despesa", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Fornecedores.Fornecedor", "Fornecedor")
+                        .WithMany()
+                        .HasForeignKey("FornecedorId");
+
+                    b.Navigation("Fornecedor");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Financeiro.Receita", b =>
+                {
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Clientes.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId");
+
+                    b.HasOne("TheHome.SistemaDeGestao.Business.Estagios.Entregas.EstagioEntrega", null)
+                        .WithMany("Pagamentos")
+                        .HasForeignKey("EstagioEntregaId");
+
+                    b.Navigation("Cliente");
+                });
+
             modelBuilder.Entity("Abp.DynamicEntityProperties.DynamicProperty", b =>
                 {
                     b.Navigation("DynamicPropertyValues");
@@ -2055,6 +2972,59 @@ namespace TheHome.SistemaDeGestao.Migrations
                     b.Navigation("Settings");
 
                     b.Navigation("Tokens");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Clientes.Cliente", b =>
+                {
+                    b.Navigation("Projetos");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.Entregas.EstagioEntrega", b =>
+                {
+                    b.Navigation("Pagamentos");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.Producoes.EstagioProducao", b =>
+                {
+                    b.Navigation("Checklist");
+
+                    b.Navigation("Compras");
+
+                    b.Navigation("UsosEstoque");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estagios.Visitas.EstagioVisita", b =>
+                {
+                    b.Navigation("Fotos");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Estoque.ItemEstoque", b =>
+                {
+                    b.Navigation("Movimentos");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Financeiro.Compra", b =>
+                {
+                    b.Navigation("AdicoesAoEstoque");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.FormasPagamento.FormaPagamentoProjeto", b =>
+                {
+                    b.Navigation("FormasPagamentoAceitas");
+
+                    b.Navigation("Parcelas");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Pessoas.Pessoa", b =>
+                {
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Fornecedor");
+                });
+
+            modelBuilder.Entity("TheHome.SistemaDeGestao.Business.Projetos.Projeto", b =>
+                {
+                    b.Navigation("Notas");
                 });
 #pragma warning restore 612, 618
         }

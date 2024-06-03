@@ -11,7 +11,7 @@ namespace TheHome.SistemaDeGestao.Business.Enderecos.Dto
 {
     [AutoMapFrom(typeof(Endereco))]
     [AutoMapTo(typeof(Endereco))]
-    public class EnderecoDto : EntityDto
+    public class EnderecoDto : EntityDto<long>
     {
         [Required]
         [MaxLength(10)]

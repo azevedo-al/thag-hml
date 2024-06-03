@@ -29,7 +29,7 @@ namespace TheHome.SistemaDeGestao.Business.Projetos
         [Required]
         public virtual long LocalId { get; set; }
         [ForeignKey("LocalId")]
-        public virtual Endereco Local { get; set; }
+        public virtual Endereco Local { get; }
 
         [Required]
         public virtual EstagioVisita Visita { get; set; }

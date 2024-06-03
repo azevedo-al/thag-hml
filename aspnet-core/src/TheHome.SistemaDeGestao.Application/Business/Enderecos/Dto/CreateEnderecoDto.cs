@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace TheHome.SistemaDeGestao.Business.Enderecos.Dto
 {
     [AutoMapTo(typeof(Endereco))]
-    public class CreateEnderecoDto : EntityDto
+    public class CreateEnderecoDto// : EntityDto<long>
     {
         [Required]
         [MaxLength(10)]

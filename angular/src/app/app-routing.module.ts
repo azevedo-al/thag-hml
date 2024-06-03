@@ -8,6 +8,7 @@ import { UsersComponent } from './users/users.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { EnderecosComponent } from './enderecos/enderecos.component';
 import { ProjetosComponent } from './projetos/projetos.component';
+import { EstoqueComponent } from './estoque/estoque.component';
 import { TenantsComponent } from './tenants/tenants.component';
 import { RolesComponent } from 'app/roles/roles.component';
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
@@ -26,6 +27,7 @@ import { ChangePasswordComponent } from './users/change-password/change-password
                     { path: 'clientes', component: ClientesComponent, data: { permission: 'BusinessManagement' }, canActivate: [AppRouteGuard] },
                     { path: 'enderecos', component: EnderecosComponent, data: { permission: 'BusinessManagement' }, canActivate: [AppRouteGuard] },
                     { path: 'projetos', component: ProjetosComponent, data: { permission: 'BusinessManagement' }, canActivate: [AppRouteGuard] },
+                    { path: 'estoque', component: EstoqueComponent, canActivate: [AppRouteGuard] }, // data: { permission: 'BusinessManagement' }, canActivate: [AppRouteGuard] },
                     { path: 'about', component: AboutComponent, canActivate: [AppRouteGuard] },
                     { path: 'update-password', component: ChangePasswordComponent, canActivate: [AppRouteGuard] }
                 ]

@@ -1,7 +1,10 @@
-﻿using Abp.AutoMapper;
+﻿using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
 using Abp.Modules;
 using Abp.Reflection.Extensions;
 using TheHome.SistemaDeGestao.Authorization;
+using TheHome.SistemaDeGestao.Business.Estoque;
+using TheHome.SistemaDeGestao.Business.Estoque.Dto;
 
 namespace TheHome.SistemaDeGestao
 {
@@ -12,7 +15,8 @@ namespace TheHome.SistemaDeGestao
     {
         public override void PreInitialize()
         {
-            Configuration.Authorization.Providers.Add<Authorization.SistemaDeGestaoAuthorizationProvider>();
+            Configuration.Authorization.Providers.Add<SistemaDeGestaoAuthorizationProvider>();
+            Configuration.Modules.AbpAutoMapper().Configurators.Add(EstoqueCustomMappers.ConfigMaps);
         }
 
         public override void Initialize()

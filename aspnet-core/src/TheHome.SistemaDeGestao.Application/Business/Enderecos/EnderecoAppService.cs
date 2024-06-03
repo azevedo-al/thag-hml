@@ -13,10 +13,10 @@ using TheHome.SistemaDeGestao.Business.Enderecos.Dto;
 namespace TheHome.SistemaDeGestao.Business.Enderecos
 {
     [AbpAuthorize(PermissionNames.Business_Management)]
-    public class EnderecoAppService : AsyncCrudAppService<Endereco, EnderecoDto, int, PagedEnderecoResultRequestDto, CreateEnderecoDto, EnderecoDto>, IEnderecoAppService
+    public class EnderecoAppService : AsyncCrudAppService<Endereco, EnderecoDto, long, PagedEnderecoResultRequestDto, CreateEnderecoDto, EnderecoDto>, IEnderecoAppService
     {
 
-        public EnderecoAppService(IRepository<Endereco> enderecoRepository) : base(enderecoRepository) { }
+        public EnderecoAppService(IRepository<Endereco, long> enderecoRepository) : base(enderecoRepository) { }
 
         //public EnderecoDto Create(CreateEnderecoDto input)
         //{

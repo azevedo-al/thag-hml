@@ -39,6 +39,10 @@ import { EditEnderecoDialogComponent } from '@app/enderecos/edit-endereco/edit-e
 // projetos
 import { ProjetosComponent } from '@app/projetos/projetos.component';
 import { ProjetoDetailsDialogComponent } from '@app/projetos/projeto-details/projeto-details-dialog.component';
+// estoque
+import { EstoqueComponent } from '@app/estoque/estoque.component';
+import { CreateItemEstoqueDialogComponent } from '@app/estoque/create-item-estoque-dialog/create-item-estoque-dialog.component';
+import { EditItemEstoqueDialogComponent } from '@app/estoque/edit-item-estoque-dialog/edit-item-estoque-dialog.component';
 // layout
 import { HeaderComponent } from './layout/header.component';
 import { HeaderLeftNavbarComponent } from './layout/header-left-navbar.component';
@@ -80,6 +84,10 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
         // projetos
         ProjetosComponent,
         ProjetoDetailsDialogComponent,
+        // estoque
+        EstoqueComponent,
+        CreateItemEstoqueDialogComponent,
+        EditItemEstoqueDialogComponent,
         // layout
         HeaderComponent,
         HeaderLeftNavbarComponent,

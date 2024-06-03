@@ -16,6 +16,9 @@ using TheHome.SistemaDeGestao.Business.Estagios.Producoes;
 using TheHome.SistemaDeGestao.Business.Estagios.Entregas;
 using TheHome.SistemaDeGestao.Business.Estagios;
 using TheHome.SistemaDeGestao.Business.Arquivos;
+using TheHome.SistemaDeGestao.Business.Estoque;
+using TheHome.SistemaDeGestao.Business.FormasPagamento;
+using TheHome.SistemaDeGestao.Business.Financeiro;
 
 namespace TheHome.SistemaDeGestao.EntityFrameworkCore
 {
@@ -36,6 +39,19 @@ namespace TheHome.SistemaDeGestao.EntityFrameworkCore
         public virtual DbSet<EstagioProducao>  EstagiosProducao   { get; set; }
         public virtual DbSet<EstagioEntrega>   EstagiosEntrega    { get; set; }
         public virtual DbSet<EstagioFinal>     EstagiosFinalizado { get; set; }
+
+        public virtual DbSet<ItemEstoque>          ItensEstoque { get; set; }
+        public virtual DbSet<FluxoEstoque>         FluxoEstoque { get; set; }
+        public virtual DbSet<UsoEstoque>           UsoEstoque { get; set; }
+        public virtual DbSet<AbastecimentoEstoque> AbastecimentoEstoque { get; set; }
+
+        public virtual DbSet<FormaPagamentoGeral> FormasPagamentoGerais { get; set; }
+        public virtual DbSet<FormaPagamentoProjeto> FormasPagamentoProjeto { get; set; }
+
+        public virtual DbSet<FluxoCaixa> FluxoCaixa { get; set; }
+        public virtual DbSet<Despesa>    Despesas { get; set; }
+        public virtual DbSet<Receita>    Receitas { get; set; }
+        public virtual DbSet<Compra>     Compras { get; set; }
 
         public virtual DbSet<Foto> Fotos { get; set; }
         public virtual DbSet<PDF>  PDFs  { get; set; }

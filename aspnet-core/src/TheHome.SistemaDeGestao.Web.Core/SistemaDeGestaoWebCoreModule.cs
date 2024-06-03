@@ -13,6 +13,7 @@ using TheHome.SistemaDeGestao.Authentication.JwtBearer;
 using TheHome.SistemaDeGestao.Configuration;
 using TheHome.SistemaDeGestao.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
+using Abp.Configuration.Startup;
 
 namespace TheHome.SistemaDeGestao
 {
@@ -35,6 +36,7 @@ namespace TheHome.SistemaDeGestao
 
         public override void PreInitialize()
         {
+            Configuration.Modules.AbpWebCommon().SendAllExceptionsToClients = true;
             Configuration.DefaultNameOrConnectionString = _appConfiguration.GetConnectionString(
                 SistemaDeGestaoConsts.ConnectionStringName
             );
