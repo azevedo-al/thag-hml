@@ -520,6 +520,62 @@ export class EstoqueServiceProxy {
     }
 
     /**
+     * @param body (optional) 
+     * @return Success
+     */
+    update(body: UpdateItemEstoqueDto | undefined): Observable<ItemEstoqueDto> {
+        let url_ = this.baseUrl + "/api/services/app/Estoque/Update";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_ : any = {
+            body: content_,
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+                "Content-Type": "application/json",
+                "Accept": "text/plain"
+            })
+        };
+
+        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processUpdate(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processUpdate(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<ItemEstoqueDto>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<ItemEstoqueDto>;
+        }));
+    }
+
+    protected processUpdate(response: HttpResponseBase): Observable<ItemEstoqueDto> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 200) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = ItemEstoqueDto.fromJS(resultData200);
+            return _observableOf(result200);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf(null as any);
+    }
+
+    /**
      * @param id (optional) 
      * @return Success
      */
@@ -676,62 +732,6 @@ export class EstoqueServiceProxy {
     }
 
     protected processCreate(response: HttpResponseBase): Observable<ItemEstoqueDto> {
-        const status = response.status;
-        const responseBlob =
-            response instanceof HttpResponse ? response.body :
-            (response as any).error instanceof Blob ? (response as any).error : undefined;
-
-        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
-        if (status === 200) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = ItemEstoqueDto.fromJS(resultData200);
-            return _observableOf(result200);
-            }));
-        } else if (status !== 200 && status !== 204) {
-            return blobToText(responseBlob).pipe(_observableMergeMap((_responseText: string) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            }));
-        }
-        return _observableOf(null as any);
-    }
-
-    /**
-     * @param body (optional) 
-     * @return Success
-     */
-    update(body: UpdateItemEstoqueDto | undefined): Observable<ItemEstoqueDto> {
-        let url_ = this.baseUrl + "/api/services/app/Estoque/Update";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_ : any = {
-            body: content_,
-            observe: "response",
-            responseType: "blob",
-            headers: new HttpHeaders({
-                "Content-Type": "application/json",
-                "Accept": "text/plain"
-            })
-        };
-
-        return this.http.request("put", url_, options_).pipe(_observableMergeMap((response_ : any) => {
-            return this.processUpdate(response_);
-        })).pipe(_observableCatch((response_: any) => {
-            if (response_ instanceof HttpResponseBase) {
-                try {
-                    return this.processUpdate(response_ as any);
-                } catch (e) {
-                    return _observableThrow(e) as any as Observable<ItemEstoqueDto>;
-                }
-            } else
-                return _observableThrow(response_) as any as Observable<ItemEstoqueDto>;
-        }));
-    }
-
-    protected processUpdate(response: HttpResponseBase): Observable<ItemEstoqueDto> {
         const status = response.status;
         const responseBlob =
             response instanceof HttpResponse ? response.body :
@@ -2628,7 +2628,7 @@ export interface IChangeUserLanguageDto {
 }
 
 export class CreateAbastecimentoEstoqueDto implements ICreateAbastecimentoEstoqueDto {
-    itemId: number;
+    itemId: number | undefined;
     qtd: number;
     desc: string | undefined;
 
@@ -2673,7 +2673,7 @@ export class CreateAbastecimentoEstoqueDto implements ICreateAbastecimentoEstoqu
 }
 
 export interface ICreateAbastecimentoEstoqueDto {
-    itemId: number;
+    itemId: number | undefined;
     qtd: number;
     desc: string | undefined;
 }
@@ -3006,7 +3006,7 @@ export interface ICreateUserDto {
 }
 
 export class CreateUsoEstoqueDto implements ICreateUsoEstoqueDto {
-    itemId: number;
+    itemId: number | undefined;
     qtd: number;
     desc: string | undefined;
 
@@ -3051,7 +3051,7 @@ export class CreateUsoEstoqueDto implements ICreateUsoEstoqueDto {
 }
 
 export interface ICreateUsoEstoqueDto {
-    itemId: number;
+    itemId: number | undefined;
     qtd: number;
     desc: string | undefined;
 }
@@ -4387,8 +4387,8 @@ export class UpdateItemEstoqueDto implements IUpdateItemEstoqueDto {
     nome: string;
     desc: string | undefined;
     unidade: string;
-    readonly novosUsos: CreateUsoEstoqueDto[] | undefined;
-    readonly novosAbastecimentos: CreateAbastecimentoEstoqueDto[] | undefined;
+    novosUsos: CreateUsoEstoqueDto[] | undefined;
+    novosAbastecimentos: CreateAbastecimentoEstoqueDto[] | undefined;
 
     constructor(data?: IUpdateItemEstoqueDto) {
         if (data) {
@@ -4406,14 +4406,14 @@ export class UpdateItemEstoqueDto implements IUpdateItemEstoqueDto {
             this.desc = _data["desc"];
             this.unidade = _data["unidade"];
             if (Array.isArray(_data["novosUsos"])) {
-                (<any>this).novosUsos = [] as any;
+                this.novosUsos = [] as any;
                 for (let item of _data["novosUsos"])
-                    (<any>this).novosUsos.push(CreateUsoEstoqueDto.fromJS(item));
+                    this.novosUsos.push(CreateUsoEstoqueDto.fromJS(item));
             }
             if (Array.isArray(_data["novosAbastecimentos"])) {
-                (<any>this).novosAbastecimentos = [] as any;
+                this.novosAbastecimentos = [] as any;
                 for (let item of _data["novosAbastecimentos"])
-                    (<any>this).novosAbastecimentos.push(CreateAbastecimentoEstoqueDto.fromJS(item));
+                    this.novosAbastecimentos.push(CreateAbastecimentoEstoqueDto.fromJS(item));
             }
         }
     }

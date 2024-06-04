@@ -10,7 +10,9 @@ import { forEach as _forEach, map as _map } from 'lodash-es';
 import { AppComponentBase } from '@shared/app-component-base';
 import {
   EstoqueServiceProxy,
-  UpdateItemEstoqueDto
+  UpdateItemEstoqueDto,
+  CreateAbastecimentoEstoqueDto,
+  CreateUsoEstoqueDto
 } from '@shared/service-proxies/service-proxies';
 import { AbpValidationError } from '@shared/components/validation/abp-validation.api';
 
@@ -38,6 +40,8 @@ export class EditItemEstoqueDialogComponent extends AppComponentBase implements 
       this.itemEstoque.nome = result.nome;
       this.itemEstoque.desc = result.desc;
       this.itemEstoque.unidade = result.unidade;
+      this.itemEstoque.novosAbastecimentos = [];
+      this.itemEstoque.novosUsos = [];
     });
   }
 
@@ -50,5 +54,14 @@ export class EditItemEstoqueDialogComponent extends AppComponentBase implements 
       this.saving = false;
       this.bsModalRef.hide();
     })
+  }
+
+  novoAbastecimento(): void {
+    var f = new CreateAbastecimentoEstoqueDto();
+    this.itemEstoque.novosAbastecimentos.push(f);
+  }
+  novoUso(): void {
+    var f = new CreateUsoEstoqueDto();
+    this.itemEstoque.novosUsos.push(f);
   }
 }
