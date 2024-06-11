@@ -1,24 +1,41 @@
 version: '3'
 
 services:
-
   abp_host:
+    # networks:
+    #   - abp-network
     image: abp/host
     environment:
-      ASPNETCORE_ENVIRONMENT: "Staging"
-      ConnectionStrings__Default: "Server=10.0.75.1; Database=SistemaDeGestaoDb; User=sa; Password=1234Qwer;TrustServerCertificate=True;"
-      App__ServerRootAddress: "http://localhost:44311/"
-      App__ClientRootAddress: "http://localhost:4200/"
-      App__CorsOrigins: "http://localhost:4200"
-      TZ: "America/Toronto"
-      Kestrel__Endpoints__Http__Url: "http://+:80"
+      - ASPNETCORE_ENVIRONMENT=Staging
+      - ConnectionStrings__Default=Server=db; Database=SistemaDeGestaoDb; User Id=sa; Password=1234Qwer; TrustServerCertificate=True
+      # - ConnectionStrings__Default=Server=192.168.244.5,5434; Database=SistemaDeGestaoDb; User Id=sa; Password=1234Qwer; TrustServerCertificate=True
+      - App__ServerRootAddress=http://0.0.0.0:44311/
+      - App__ClientRootAddress=http://localhost:4200/
+      - App__CorsOrigins=http://localhost:4200,http://abp_ng:4200,http://localhost:8080,http://localhost:8081,http://localhost:3000
+      - TZ=America/Toronto
+      - Kestrel__Endpoints__Http__Url=http://+:80
     ports:
       - "44311:80"
     volumes:
       - "./Host-Logs:/app/App_Data/Logs"
     restart: always
+    depends_on:
+      - db
 
   abp_ng:
     image: abp/ng
     ports:
       - "4200:80"
+  
+  db:
+    image: mcr.microsoft.com/mssql/server:latest
+    environment:
+      - SA_PASSWORD=1234Qwer
+      - ACCEPT_EULA=Y
+    ports:
+      - "5435:1433"
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
