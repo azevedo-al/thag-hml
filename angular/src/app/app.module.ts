@@ -29,13 +29,13 @@ import { EditUserDialogComponent } from '@app/users/edit-user/edit-user-dialog.c
 import { ChangePasswordComponent } from './users/change-password/change-password.component';
 import { ResetPasswordDialogComponent } from './users/reset-password/reset-password.component';
 // clientes
-import { ClientesComponent } from '@app/clientes/clientes.component';
-import { CreateClienteDialogComponent } from '@app/clientes/create-cliente/create-cliente-dialog.component';
-import { EditClienteDialogComponent } from '@app/clientes/edit-cliente/edit-cliente-dialog.component';
+// import { ClientesComponent } from '@app/clientes/clientes.component';
+// import { CreateClienteDialogComponent } from '@app/clientes/create-cliente/create-cliente-dialog.component';
+// import { EditClienteDialogComponent } from '@app/clientes/edit-cliente/edit-cliente-dialog.component';
 // enderecos
-import { EnderecosComponent } from '@app/enderecos/enderecos.component';
-import { CreateEnderecoDialogComponent } from '@app/enderecos/create-endereco/create-endereco-dialog.component';
-import { EditEnderecoDialogComponent } from '@app/enderecos/edit-endereco/edit-endereco-dialog.component';
+// import { EnderecosComponent } from '@app/enderecos/enderecos.component';
+// import { CreateEnderecoDialogComponent } from '@app/enderecos/create-endereco/create-endereco-dialog.component';
+// import { EditEnderecoDialogComponent } from '@app/enderecos/edit-endereco/edit-endereco-dialog.component';
 // projetos
 import { ProjetosComponent } from '@app/projetos/projetos.component';
 import { ProjetoDetailsDialogComponent } from '@app/projetos/projeto-details/projeto-details-dialog.component';
@@ -43,6 +43,7 @@ import { ProjetoDetailsDialogComponent } from '@app/projetos/projeto-details/pro
 import { EstoqueComponent } from '@app/estoque/estoque.component';
 import { CreateItemEstoqueDialogComponent } from '@app/estoque/create-item-estoque-dialog/create-item-estoque-dialog.component';
 import { EditItemEstoqueDialogComponent } from '@app/estoque/edit-item-estoque-dialog/edit-item-estoque-dialog.component';
+import { FluxoEstoqueFormComponent } from '@app/estoque/fluxo-estoque-form/fluxo-estoque-form.component';
 // layout
 import { HeaderComponent } from './layout/header.component';
 import { HeaderLeftNavbarComponent } from './layout/header-left-navbar.component';
@@ -73,14 +74,14 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
         EditUserDialogComponent,
         ChangePasswordComponent,
         ResetPasswordDialogComponent,
-        // clientes
-        ClientesComponent,
-        CreateClienteDialogComponent,
-        EditClienteDialogComponent,
-        // enderecos
-        EnderecosComponent,
-        CreateEnderecoDialogComponent,
-        EditEnderecoDialogComponent,
+        // // clientes
+        // ClientesComponent,
+        // CreateClienteDialogComponent,
+        // EditClienteDialogComponent,
+        // // enderecos
+        // EnderecosComponent,
+        // CreateEnderecoDialogComponent,
+        // EditEnderecoDialogComponent,
         // projetos
         ProjetosComponent,
         ProjetoDetailsDialogComponent,
@@ -88,6 +89,7 @@ import { SidebarMenuComponent } from './layout/sidebar-menu.component';
         EstoqueComponent,
         CreateItemEstoqueDialogComponent,
         EditItemEstoqueDialogComponent,
+        FluxoEstoqueFormComponent,
         // layout
         HeaderComponent,
         HeaderLeftNavbarComponent,
