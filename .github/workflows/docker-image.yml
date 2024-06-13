@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build the Docker image
-      run: docker build . --file ./aspnet-core/src/TheHome.SistemaDeGestao.Web.Host/Dockerfile --tag abp/host | docker build . --file ./angular/Dockerfile --tag abp/ng
+      run: docker build ./aspnet-core --file ./aspnet-core/src/TheHome.SistemaDeGestao.Web.Host/Dockerfile --tag abp/host | docker build ./angular --file ./angular/Dockerfile --tag abp/ng
